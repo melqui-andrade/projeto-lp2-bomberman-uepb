@@ -5,8 +5,8 @@ public class ConteinerDeJanelas extends JFrame {
 
 	public ConteinerDeJanelas(){
 		add(new Fase());
-		setTitle("Meu jogo");
-		setSize(500,400);
+		setTitle("Bomber Computeiro");
+		setSize(800,600);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

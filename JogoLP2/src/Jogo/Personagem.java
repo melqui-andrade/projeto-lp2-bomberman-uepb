@@ -2,6 +2,8 @@ package Jogo;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -10,16 +12,19 @@ import javax.swing.ImageIcon;
  * @author Melqui
  *
  */
-public class Barata {
+public class Personagem {
 
 	private int x, y;
 	private int dx, dy;
+	private int largura;
+	private int altura;
 	private Image imagem;
+	private List<Bomba> bombas;
 	
-	public Barata(){
-		ImageIcon referencia = new ImageIcon("res\\barata.gif");
+	public Personagem(){
+		ImageIcon referencia = new ImageIcon("res\\personagem.gif");
 		imagem = referencia.getImage();
-		
+		bombas = new ArrayList<Bomba>();
 		this.x = 100;
 		this.y = 100;
 	}
@@ -30,17 +35,17 @@ public class Barata {
 		System.out.println(x +" "+y);
 		x += dx;
 		y += dy;
-		if(this.x < 2){
-			x = 2;
+		if(this.x < 0){
+			x = 0;
 		}
-		if(this.x > 435){
-			x = 435;
+		if(this.x > 765){
+			x = 765;
 		}
 		if(this.y < 0){
 			y = 0;
 		}
-		if(this.y > 315){
-			y = 315;
+		if(this.y > 520){
+			y = 520;
 		}
 	}
 	/**
@@ -60,6 +65,15 @@ public class Barata {
 	public Image getImagem() {
 		return imagem;
 	}
+	
+	public List<Bomba> getBombas() {
+		return bombas;
+	}
+	
+	public void soltaBomba(){
+		this.bombas.add(new Bomba(x, y, 1));
+	}
+	
 	/**
 	 * keyPressed Captura a tecla pressionada pelo usuario e executa
 	 * a ação correspondente
@@ -68,6 +82,10 @@ public class Barata {
 	public void keyPressed(KeyEvent tecla){
 		
 		int codigo = tecla.getKeyCode();
+		
+		if(codigo == KeyEvent.VK_SPACE)
+			soltaBomba();
+		
 		if(codigo == KeyEvent.VK_UP)
 			dy = -1;
 		

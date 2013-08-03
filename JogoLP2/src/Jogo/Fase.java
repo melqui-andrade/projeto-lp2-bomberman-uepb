@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ import javax.swing.Timer;
 public class Fase extends JPanel implements ActionListener{
 	
 	private Image fundo;
-	private Barata barata;
+	private Personagem jogador;
 	private Timer timer;
 
 	public Fase(){
@@ -23,10 +24,10 @@ public class Fase extends JPanel implements ActionListener{
 		setDoubleBuffered(true);
 		setFocusable(true);
 		addKeyListener(new TecladoAdapter());
-		ImageIcon referencia = new ImageIcon("res\\fundo.jpg");
+		ImageIcon referencia = new ImageIcon("res\\fundo1.jpg");
 		fundo = referencia.getImage();
-		barata = new Barata();
-		timer = new Timer(5, this);
+		jogador = new Personagem();
+		timer = new Timer(8, this);
 		timer.start();
 		
 	}
@@ -35,13 +36,29 @@ public class Fase extends JPanel implements ActionListener{
 		
 		Graphics2D graficos = (Graphics2D) g;
 		graficos.drawImage(fundo, 0, 0, null);
-		graficos.drawImage(barata.getImagem(), barata.getX(), barata.getY(),this);
+		graficos.drawImage(jogador.getImagem(), jogador.getX(), jogador.getY(),this);
+		
+		List<Bomba> bombas = jogador.getBombas();
+		
+		for(int i = 0; i < bombas.size();i++){
+			Bomba b = (Bomba)bombas.get(i);
+			graficos.drawImage(b.getImagem(),b.getX(),b.getY(),this);
+		}
 		
 		g.dispose();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		barata.mexer();
+		
+		List<Bomba> bombas = jogador.getBombas();
+		for(int i = 0; i < bombas.size();i++){
+			Bomba b = (Bomba)bombas.get(i);
+			if(b.isVisivel()){
+				b.soltaBomba();
+			}
+		}
+		
+		jogador.mexer();
 		repaint();
 	}
 	
@@ -50,13 +67,13 @@ public class Fase extends JPanel implements ActionListener{
 		@Override
 		public void keyPressed(KeyEvent arg0) {
 			// TODO Auto-generated method stub
-			barata.keyPressed(arg0);
+			jogador.keyPressed(arg0);
 		}
 
 		@Override
 		public void keyReleased(KeyEvent arg0) {
 			// TODO Auto-generated method stub
-			barata.keyReleased(arg0);
+			jogador.keyReleased(arg0);
 		}
 		
 		
