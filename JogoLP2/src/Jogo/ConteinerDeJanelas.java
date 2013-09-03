@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 public class ConteinerDeJanelas extends JFrame {
 
 	public ConteinerDeJanelas(){
+		
 		add(new Fase());
 		setTitle("Bomber Computeiro");
 		setSize(800,600);
@@ -14,9 +15,6 @@ public class ConteinerDeJanelas extends JFrame {
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		new ConteinerDeJanelas();
-		
-	}
+
 
 }

@@ -1,6 +1,7 @@
 package Jogo;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,9 @@ public class Personagem {
 	private int dx, dy;
 	private int largura;
 	private int altura;
+	private static final int VELOCIDADE = 2;
 	private Image imagem;
+	private boolean isVisivel;
 	private List<Bomba> bombas;
 	
 	public Personagem(){
@@ -27,12 +30,14 @@ public class Personagem {
 		bombas = new ArrayList<Bomba>();
 		this.x = 100;
 		this.y = 100;
+		this.largura = imagem.getWidth(null);
+		this.altura = imagem.getHeight(null);
 	}
 	/**
 	 * mexer Metodo para movimentar o objeto na tela
 	 */
 	public void mexer(){
-		System.out.println(x +" "+y);
+		
 		x += dx;
 		y += dy;
 		if(this.x < 0){
@@ -66,6 +71,13 @@ public class Personagem {
 		return imagem;
 	}
 	
+	public boolean isVisivel() {
+		return isVisivel;
+	}
+	public void setVisivel(boolean isVisivel) {
+		this.isVisivel = isVisivel;
+	}
+	
 	public List<Bomba> getBombas() {
 		return bombas;
 	}
@@ -87,16 +99,16 @@ public class Personagem {
 			soltaBomba();
 		
 		if(codigo == KeyEvent.VK_UP)
-			dy = -1;
+			dy = -VELOCIDADE;
 		
 		if(codigo == KeyEvent.VK_DOWN)
-			dy = 1;
+			dy = VELOCIDADE;
 		
 		if(codigo == KeyEvent.VK_LEFT)
-			dx = -1;
+			dx = -VELOCIDADE;
 		
 		if(codigo == KeyEvent.VK_RIGHT)
-			dx = 1;
+			dx = VELOCIDADE;
 		
 	}
 	public void keyReleased(KeyEvent tecla){
@@ -114,6 +126,10 @@ public class Personagem {
 		if(codigo == KeyEvent.VK_RIGHT)
 			dx = 0;
 		
+	}
+	
+	public Rectangle getBounds(){
+		return new Rectangle(x, y, largura, altura);
 	}
 	
 
