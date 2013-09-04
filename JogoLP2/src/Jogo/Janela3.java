@@ -38,6 +38,7 @@ public class Janela3 extends JFrame{
 		Icon iconeSair = new ImageIcon("res//btnRetornar.png");
 		btnSair.setIcon( iconeSair );
 		getContentPane().add(btnSair);
+		
 
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
