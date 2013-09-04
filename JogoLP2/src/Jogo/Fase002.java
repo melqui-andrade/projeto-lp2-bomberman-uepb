@@ -13,7 +13,13 @@ public class Fase002 extends JPanel implements ActionListener {
 	private Image fundo;
 	private Image caixa;
 	private Image vaso;
+	private int timer;
+	private static final int TEMPO_TELA = 400;
+	private Image telaInicial;
 	public Fase002() {
+		timer = 0;
+		ImageIcon telaInicial_1 = new ImageIcon("res\\fase02.jpg");
+		telaInicial = telaInicial_1.getImage();
 		ImageIcon referencia = new ImageIcon("res\\fundo002.png");
 		fundo = referencia.getImage();
 		
@@ -60,13 +66,17 @@ void drawImageFase(Graphics2D graficos){
 	}			
 }
 	public void paint(Graphics g){
-		
+		timer ++;
 		Graphics2D graficos = (Graphics2D) g;
-		graficos.drawImage(fundo, 0, 0, null);
+		graficos.drawImage(telaInicial, 0, 0, null);	
 			
-		drawImageFase(graficos);
-				
+		if(timer >= TEMPO_TELA){
+			graficos.drawImage(fundo, 0, 0, null);
+			drawImageFase(graficos);
+		}
 		g.dispose();
+		setSize(801, 601);
+		setSize(800, 600);
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {

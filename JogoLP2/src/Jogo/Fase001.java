@@ -1,11 +1,13 @@
 package Jogo;
 
 import java.awt.Graphics;
+import java.util.Scanner;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -14,16 +16,24 @@ import javax.swing.JPanel;
 public class Fase001 extends JPanel implements ActionListener{
 
 	private Image fundo;
+	private Image telaInicial;
 	private Image planta;
 	private Image toco;
+	private int timer;
+	private static final int TEMPO_TELA = 400;
 
 	public Fase001() {
-		ImageIcon referencia = new ImageIcon("res\\fundo002.png");
+		timer = 0;
+		ImageIcon telaInicial_1 = new ImageIcon("res\\fase01.jpg");
+		telaInicial = telaInicial_1.getImage();
+		
+		ImageIcon referencia = new ImageIcon("res\\fundo004.png");
 		fundo = referencia.getImage();
 		
 		ImageIcon planta1 = new ImageIcon("res\\planta001.png");
 		ImageIcon toco1 = new ImageIcon("res\\toco001.png");
 				
+		
 		planta = planta1.getImage();
 		toco = toco1.getImage();
 				
@@ -66,13 +76,17 @@ void drawImageFase(Graphics2D graficos){
 	}			
 }
 public void paint(Graphics g){
-	
+	timer ++;
 	Graphics2D graficos = (Graphics2D) g;
-	graficos.drawImage(fundo, 0, 0, null);
+	graficos.drawImage(telaInicial, 0, 0, null);	
 		
-	drawImageFase(graficos);
-			
+	if(timer >= TEMPO_TELA){
+		graficos.drawImage(fundo, 0, 0, null);
+		drawImageFase(graficos);
+	}
 	g.dispose();
+	setSize(801, 601);
+	setSize(800, 600);
 }
 
 public void actionPerformed(ActionEvent arg0) {

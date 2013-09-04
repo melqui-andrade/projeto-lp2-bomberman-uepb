@@ -5,7 +5,7 @@ public class ConteinerDeJanelas extends JFrame {
 
 	public ConteinerDeJanelas(){
 		
-		add(new Fase());
+		add(new Fase002());
 		setTitle("Bomber Computeiro");
 		setSize(800,600);
 		setLocationRelativeTo(null);
