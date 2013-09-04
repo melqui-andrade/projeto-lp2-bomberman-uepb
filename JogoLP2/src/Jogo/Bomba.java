@@ -37,7 +37,7 @@ public class Bomba {
 		isVisivel = true;
 		isEstouro = false;
 		
-		for(int i = 0; i <explosao.length;i++){//Determina o tamanho da explosao da bomba
+		/*for(int i = 0; i <explosao.length;i++){//Determina o tamanho da explosao da bomba
 			for(int j = 0; j < explosao[i].length;i++){
 				if(i == (explosao[i].length/2) || j == (explosao[i].length/2)){
 					explosao[i][j] = "e";
@@ -46,7 +46,7 @@ public class Bomba {
 					explosao[i][j] = "x";
 				}
 			}
-		}
+		}*/
 		
 	}
 	public void soltaBomba(){

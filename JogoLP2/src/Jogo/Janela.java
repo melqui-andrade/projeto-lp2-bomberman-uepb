@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Janela extends JFrame{
 	JPanel painel = new JPanel();
+	
 	private JTable table;
 	private Image fundo;
 	JButton b1;

@@ -76,9 +76,6 @@ public class Inimigo {
 	}
 	
 	public void mexer(){
-		/*System.out.println("LimiteX: "+isLimX);
-		System.out.println("LimiteY: "+isLimY);
-		System.out.println("Direcao"+direcao);*/
 		
 		if(direcao == 0){
 			

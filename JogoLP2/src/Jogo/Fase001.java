@@ -3,6 +3,7 @@ package Jogo;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Fase001 extends JPanel implements ActionListener{
 		toco = toco1.getImage();
 				
 	}
+
 	
 void drawImageFase(Graphics2D graficos){
 	String[][] arrayFase = {	{"-","x","p","-","-","-","-","-","p","p","p","-","-","-","-","p","p","p","p"},
@@ -49,6 +51,7 @@ void drawImageFase(Graphics2D graficos){
 		for (int j =0; j< arrayFase[i].length; j++){
 			if (arrayFase[i][j] == "x"){
 				graficos.drawImage(toco, x,y,this);
+				new Rectangle(x, y, 40, 40);
 							
 			}if(arrayFase[i][j] == "p"){
 				graficos.drawImage(planta, x,y,this);
