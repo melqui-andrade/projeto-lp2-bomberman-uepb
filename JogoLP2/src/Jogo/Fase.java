@@ -22,7 +22,9 @@ public class Fase extends JPanel implements ActionListener {
 	private Timer timer;
 	private boolean emJogo;
 	private List<Inimigo> inimigos;
-	private int[][] coordenadas = { { 120, 50 }, { 120, 300 }, { 120, 480 }, { 120, 500 } };
+	private ArrayList<Explosao> explosoes = new ArrayList<Explosao>();
+	private int[][] coordenadas = { { 120, 50 }, { 120, 300 }, { 120, 480 },
+			{ 120, 500 } };
 
 	public Fase() {
 
@@ -58,21 +60,36 @@ public class Fase extends JPanel implements ActionListener {
 
 			graficos.drawImage(jogador.getImagem(), jogador.getX(),
 					jogador.getY(), this);
-			
+
 			List<Bomba> bombas = jogador.getBombas();
 
 			for (int i = 0; i < bombas.size(); i++) {
+
 				Bomba b = (Bomba) bombas.get(i);
-				graficos.drawImage(b.getImagem(), b.getX(), b.getY(), this);
+				if (b.isVisivel()) {
+					graficos.drawImage(b.getImagem(), b.getX(), b.getY(), this);
+				}
+
 			}
+			
+				for (int i = 0; i < explosoes.size(); i++) {
+					
+					Explosao boom = explosoes.get(i);
+					if (boom.isVisivel()) {
+						graficos.drawImage(boom.getImagem(), boom.getX(),
+								boom.getY(), this);
+						
+					}
+
+
+				}
 
 			for (int i = 0; i < inimigos.size(); i++) {
 				Inimigo monstros = inimigos.get(i);
 				graficos.drawImage(monstros.getImagem(), monstros.getX(),
 						monstros.getY(), this);
 			}
-		}
-		else{
+		} else {
 			System.exit(0);
 		}
 
@@ -86,10 +103,22 @@ public class Fase extends JPanel implements ActionListener {
 		}
 
 		List<Bomba> bombas = jogador.getBombas();
+
 		for (int i = 0; i < bombas.size(); i++) {
 			Bomba b = (Bomba) bombas.get(i);
 			if (b.isVisivel()) {
 				b.soltaBomba();
+				if (b.isEstouro()) {
+					explosoes.add(new Explosao(b.getX() , b.getY()));
+					explosoes.add(new Explosao(b.getX() + (1+i) * 30, b.getY()));
+					explosoes.add(new Explosao(b.getX() - (1+i) * 30, b.getY()));
+					explosoes.add(new Explosao(b.getX(), b.getY() + (1+i) * 30));
+					explosoes.add(new Explosao(b.getX(), b.getY() - (1+i) * 30));
+
+				}
+				
+			} else {
+				bombas.remove(i);
 			}
 		}
 		for (int i = 0; i < inimigos.size(); i++) {
@@ -98,6 +127,14 @@ public class Fase extends JPanel implements ActionListener {
 				monstro.mexer();
 			} else {
 				inimigos.remove(i);
+			}
+		}
+		for (int i = 0; i < explosoes.size(); i++) {
+			Explosao boom = explosoes.get(i);
+			if (boom.isVisivel()) {
+				boom.explode();
+			} else {
+				explosoes.remove(i);
 			}
 		}
 		jogador.mexer();
@@ -110,6 +147,7 @@ public class Fase extends JPanel implements ActionListener {
 		Rectangle formaPersonagem = jogador.getBounds();
 		Rectangle formaInimigo;
 		Rectangle formaBomba;
+		Rectangle formaExplosao;
 
 		for (int i = 0; i < inimigos.size(); i++) {
 
@@ -117,8 +155,24 @@ public class Fase extends JPanel implements ActionListener {
 			formaInimigo = tempInimigo.getBounds();
 			if (formaPersonagem.intersects(formaInimigo)) {
 				jogador.setVisivel(false);
-				
+				tempInimigo.mexer();
 
+			}
+		}
+		List<Explosao> tempExplosoes = explosoes;
+		for (int i = 0; i < tempExplosoes.size(); i++) {
+
+			Explosao explosao = tempExplosoes.get(i);
+			formaExplosao = explosao.getBounds();
+			for (int j = 0; j < inimigos.size(); j++) {
+
+				Inimigo tempInimigo = inimigos.get(j);
+				formaInimigo = tempInimigo.getBounds();
+
+				if (formaExplosao.intersects(formaInimigo)) {
+
+					tempInimigo.setVisivel(false);
+				}
 			}
 		}
 		List<Bomba> bombas = jogador.getBombas();
