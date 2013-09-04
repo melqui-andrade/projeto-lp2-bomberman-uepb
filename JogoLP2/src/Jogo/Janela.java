@@ -38,12 +38,14 @@ public class Janela extends JFrame{
 				
 		
 		JButton btnIniciar = new JButton("INICIAR");
+		painel.add(btnIniciar);
 		btnIniciar.setBorderPainted(false);
 		btnIniciar.setContentAreaFilled(false); 
 		Icon iconeIniciar = new ImageIcon("res//btnIniciar.png");
 		btnIniciar.setIcon( iconeIniciar );
 		btnIniciar.setFocusPainted(false); 
 		btnIniciar.setBounds(101, 300, 128, 35);
+		btnIniciar.setVisible(true);
 		getContentPane().add(btnIniciar);
 		btnIniciar.addActionListener(new ActionListener() {
 			
@@ -56,6 +58,7 @@ public class Janela extends JFrame{
 		});
 		
 		JButton btncredito = new JButton("CRÉDITO");
+		painel.add(btncredito);
 		btncredito.setBounds(101, 360, 125, 50);
 		btncredito.setBorderPainted(false);
 		btncredito.setContentAreaFilled(false); 
@@ -71,6 +74,7 @@ public class Janela extends JFrame{
 		
 		
 		JButton btnSair = new JButton("SAIR");
+		painel.add(btnSair);
 		btnSair.setBounds(101, 420, 125, 50);
 		btnSair.setBorderPainted(false);
 		btnSair.setContentAreaFilled(false); 
