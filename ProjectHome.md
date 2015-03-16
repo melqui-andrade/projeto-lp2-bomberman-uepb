@@ -1,0 +1,2 @@
+O intuito desse projeto é desenvolver um aplicativo na linguagem de programação Java para ser avaliado na disciplina de Programação II.
+O aplicativo consiste num jogo, com nome ainda a ser definido, no estilo do jogo Bomberman.
